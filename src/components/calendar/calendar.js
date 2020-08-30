@@ -87,6 +87,10 @@ export const BCalendar = Vue.extend({
       type: Boolean,
       default: false
     },
+    tabindex: {
+      type: Number,
+      default: 0
+    },
     readonly: {
       type: Boolean,
       default: false
@@ -894,6 +898,7 @@ export const BCalendar = Vue.extend({
           attrs: {
             title: label || null,
             type: 'button',
+            tabindex: this.tabindex,
             'aria-label': label || null,
             'aria-disabled': btnDisabled ? 'true' : null,
             'aria-keyshortcuts': shortcut || null
@@ -1116,7 +1121,7 @@ export const BCalendar = Vue.extend({
         attrs: {
           id: gridId,
           role: 'application',
-          tabindex: this.disabled ? null : '0',
+          tabindex: this.disabled ? null : this.tabindex,
           'data-month': activeYMD.slice(0, -3), // `YYYY-MM`, mainly for testing
           'aria-roledescription': this.labelCalendar || null,
           'aria-labelledby': gridCaptionId,
